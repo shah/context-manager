@@ -1,7 +1,7 @@
 import {
   InflectableValue,
   snakeCaseValue,
-} from "https://cdn.jsdelivr.net/gh/shah/text-inflect/mod.ts";
+} from "https://cdn.jsdelivr.net/gh/shah/text-inflect@v1.0.0/mod.ts";
 
 export interface Context {
   readonly isContext: true;
