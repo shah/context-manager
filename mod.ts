@@ -8,8 +8,8 @@ export interface Context {
   readonly execEnvs: ExecutionEnvironments;
 }
 
-export function isContext(o: object): o is Context {
-  return "isContext" in o;
+export function isContext(o: unknown): o is Context {
+  return o && typeof o === "object" && "isContext" in o;
 }
 
 export interface ProjectContext extends Context {
@@ -17,8 +17,8 @@ export interface ProjectContext extends Context {
   readonly projectPath: string;
 }
 
-export function isProjectContext(o: object): o is ProjectContext {
-  return "isProjectContext" in o;
+export function isProjectContext(o: unknown): o is ProjectContext {
+  return o && typeof o === "object" && "isProjectContext" in o;
 }
 
 export type SemanticVersion = string;
@@ -62,24 +62,26 @@ export interface ProductionEnvironment extends ExecutionEnvironment {
   isStagingEnvironment: boolean;
 }
 
-export function isExecutionEnvironment(o: any): o is ExecutionEnvironment {
-  return "isExecutionEnvironment" in o;
+export function isExecutionEnvironment(o: unknown): o is ExecutionEnvironment {
+  return o && typeof o === "object" && "isExecutionEnvironment" in o;
 }
 
-export function isExecutionEnvironments(o: any): o is ExecutionEnvironments {
-  return "isExecutionEnvironments" in o;
+export function isExecutionEnvironments(
+  o: unknown,
+): o is ExecutionEnvironments {
+  return o && typeof o === "object" && "isExecutionEnvironments" in o;
 }
 
 export function isAllExecutionEnvironments(
-  o: any,
+  o: unknown,
 ): o is AllExecutionEnvironments {
-  return "isAllExecutionEnvironments" in o;
+  return o && typeof o === "object" && "isAllExecutionEnvironments" in o;
 }
 
 export function isSomeExecutionEnvironments(
-  o: any,
+  o: unknown,
 ): o is SomeExecutionEnvironments {
-  return "isSomeExecutionEnvironments" in o;
+  return o && typeof o === "object" && "isSomeExecutionEnvironments" in o;
 }
 
 export const ctxFactory = new (class {
