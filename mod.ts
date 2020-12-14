@@ -2,24 +2,22 @@ import {
   InflectableValue,
   snakeCaseValue,
 } from "https://denopkg.com/shah/text-inflect@v1.0.5/mod.ts";
+import * as safety from "https://denopkg.com/shah/ts-safety@v0.3.1/mod.ts";
 
 export interface Context {
   readonly isContext: true;
   readonly execEnvs: ExecutionEnvironments;
 }
 
-export function isContext(o: unknown): o is Context {
-  return o && typeof o === "object" && "isContext" in o;
-}
+export const isContext = safety.typeGuard<Context>("isContext");
 
 export interface ProjectContext extends Context {
   readonly isProjectContext: true;
   readonly projectPath: string;
 }
-
-export function isProjectContext(o: unknown): o is ProjectContext {
-  return o && typeof o === "object" && "isProjectContext" in o;
-}
+export const isProjectContext = safety.typeGuard<ProjectContext>(
+  "isProjectContext",
+);
 
 export type SemanticVersion = string;
 
@@ -61,28 +59,23 @@ export interface ProductionEnvironment extends ExecutionEnvironment {
   isProductionEnvironment: true;
   isStagingEnvironment: boolean;
 }
+export const isExecutionEnvironment = safety.typeGuard<ExecutionEnvironment>(
+  "isExecutionEnvironment",
+);
 
-export function isExecutionEnvironment(o: unknown): o is ExecutionEnvironment {
-  return o && typeof o === "object" && "isExecutionEnvironment" in o;
-}
+export const isExecutionEnvironments = safety.typeGuard<ExecutionEnvironments>(
+  "isExecutionEnvironments",
+);
 
-export function isExecutionEnvironments(
-  o: unknown,
-): o is ExecutionEnvironments {
-  return o && typeof o === "object" && "isExecutionEnvironments" in o;
-}
+export const isAllExecutionEnvironments = safety.typeGuard<
+  AllExecutionEnvironments
+>(
+  "isAllExecutionEnvironments",
+);
 
-export function isAllExecutionEnvironments(
-  o: unknown,
-): o is AllExecutionEnvironments {
-  return o && typeof o === "object" && "isAllExecutionEnvironments" in o;
-}
-
-export function isSomeExecutionEnvironments(
-  o: unknown,
-): o is SomeExecutionEnvironments {
-  return o && typeof o === "object" && "isSomeExecutionEnvironments" in o;
-}
+export const isSomeExecutionEnvironments = safety.typeGuard<
+  SomeExecutionEnvironments
+>("isSomeExecutionEnvironments");
 
 export const ctxFactory = new (class {
   #testEngineering: EngineeringEnvironment = {
